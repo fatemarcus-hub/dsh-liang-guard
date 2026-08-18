@@ -16,7 +16,7 @@ Windows Defender、CIM 性能计数器、netsh 等系统组件，不是摆设界
 |---|---|---|
 | 🩺 一键体检 | Defender 实时保护/病毒库 · 防火墙 · 磁盘水位 · 内存压力 · 临时文件 · 启动项 · 网络延迟 → 综合评分（含历史对比） | `Get-MpComputerStatus` / `Get-NetFirewallProfile` / CIM |
 | 🦠 病毒查杀 | 快速/全面查杀（真实驱动 Defender 引擎）· 运行计时 · 可取消 · 威胁列表与一键清除 · 查杀历史 | `MpCmdRun.exe -Scan` / `Get-MpThreat` / `Remove-MpThreat` |
-| 🌐 网络服务 | 三节点延迟 + 真实下载带宽测试 · DNS 缓存刷新（免提权）· 深度修复（winsock/TCP-IP 重置，需管理员） | `Test-Connection` / Cloudflare 测速端点 / `netsh` |
+| 🌐 网络服务 | 真实下行 + 上行带宽测试（按评级：婴儿车→火箭）· DNS 缓存刷新（免提权）· 深度修复（winsock/TCP-IP 重置，需管理员） | Cloudflare 测速端点 / `Clear-DnsClientCache` / `netsh` |
 | 📊 系统情况 | CPU/内存实时曲线 · 磁盘水位 · TOP 内存进程 · 一键清理缓存（临时文件/浏览器缓存，免提权秒级完成） | CIM 计数 / 用户可写缓存目录清理 |
 
 **后台感知**：扫描进行中，侧栏按钮挂蓝色呼吸点；结束后右下角 Toast + 浏览器桌面
@@ -88,9 +88,8 @@ Windows Defender / CIM / netsh / psapi —— 真实系统操作
 
 ## 权限说明
 
-普通权限即可：体检、查杀、测速、DNS 刷新、收缩自己进程的内存。
-需要管理员：深度网络修复、收缩他人进程工作集（未提权时如实报告跳过数量，
-弹窗头部徽章实时显示当前权限）。
+普通权限即可：体检、查杀、测速、DNS 刷新、一键清理缓存（临时文件/浏览器缓存）。
+需要管理员：深度网络修复（winsock/TCP-IP 重置）；未提权时会明确告知而不是假装成功。
 
 ## 已知边界（如实告知）
 
@@ -133,9 +132,10 @@ Windows Defender scans, CIM performance counters, netsh repairs.
 - Real Defender quick/full scans via `MpCmdRun.exe` (async; cancel kills the
   whole process tree and *verifies* engine activity stopped, background
   breathing-dot indicator + toast + desktop notification)
-- Latency + bandwidth speed test, DNS flush and deep network repair
-- Live CPU/memory sparklines, disk usage, top processes, one-click memory
-  release (working-set trim), per-drive space analysis (async)
+- Download + upload bandwidth test with a fun rating (stroller → rocket),
+  DNS flush and deep network repair
+- Live CPU/memory sparklines, disk usage, top processes, one-click cache
+  cleanup (temp files + browser caches, no elevation, ~1s)
 - Native DSH settings card (requires DSH 0.1.0-rc.7+)
 - Same-origin API mounted on the DSH webserver — zero extra ports, zero CORS,
   zero injection surface (fixed PowerShell strings + whitelisted enum params)
