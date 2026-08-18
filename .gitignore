@@ -1,0 +1,4 @@
+# build artifacts (none today, keep for future)
+node_modules/
+dist/
+*.log
