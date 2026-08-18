@@ -94,8 +94,10 @@ Windows Defender / CIM / netsh / psapi —— 真实系统操作
 
 ## 已知边界（如实告知）
 
-- 全面查杀由 Windows 安全中心调度，可能持续数小时；"取消"结束的是等待进程，
-  服务端扫描可能继续。
+- 全面查杀由 Windows 安全中心调度，可能持续数小时。
+- 取消查杀会终止整个 MpCmdRun 进程树，并**实测验证**引擎是否停止（采样
+  MsMpEng 的 CPU 活动）；若 Defender 把扫描注册为服务级任务则无法从外部终止
+  （没有公开 API），卫士会明确告知"仍在后台"而不是让用户猜。
 - "释放内存"的收益有限——Windows 自身的内存管理通常更聪明；卫士只如实报告
   收缩/跳过数与释放量。
 - 大磁盘（数 TB）的空间分析可能需要几分钟，属正常物理开销，可随时取消。
@@ -128,8 +130,9 @@ Windows Defender scans, CIM performance counters, netsh repairs.
 **Highlights**
 
 - One-click health check with scoring and history diff
-- Real Defender quick/full scans via `MpCmdRun.exe` (async, cancellable,
-  background breathing-dot indicator + toast + desktop notification)
+- Real Defender quick/full scans via `MpCmdRun.exe` (async; cancel kills the
+  whole process tree and *verifies* engine activity stopped, background
+  breathing-dot indicator + toast + desktop notification)
 - Latency + bandwidth speed test, DNS flush and deep network repair
 - Live CPU/memory sparklines, disk usage, top processes, one-click memory
   release (working-set trim), per-drive space analysis (async)

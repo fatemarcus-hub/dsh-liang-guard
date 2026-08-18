@@ -1,6 +1,6 @@
 {
   "name": "dsh-liang-guard",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "梁神卫士 (Liang Guard) — a system-guard plugin for DeepSeek Harness (DSH) web UI: one-click health check, real Windows Defender scans, network speed test & repair, live system metrics with memory release. Injects a guarded button under the sidebar's New Session button; all APIs ride the DSH webserver's same-origin route.",
   "type": "module",
   "main": "lib/index.js",
