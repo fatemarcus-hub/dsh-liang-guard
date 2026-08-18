@@ -22,6 +22,16 @@ Windows Defender、CIM 性能计数器、netsh 等系统组件，不是摆设界
 **后台感知**：扫描进行中，侧栏按钮挂蓝色呼吸点；结束后右下角 Toast + 浏览器桌面
 原生通知，点击直达结果。关掉弹窗、甚至刷新页面都不丢任务状态。
 
+**界面预览**（截图放入 `screenshots/` 后自动显示）
+
+| 侧栏按钮与体检 | 病毒查杀 |
+|---|---|
+| ![健康检查](screenshots/health.png) | ![病毒查杀](screenshots/scan.png) |
+
+| 网络测速 | 系统情况与设置卡片 |
+|---|---|
+| ![网络测速](screenshots/network.png) | ![系统情况](screenshots/system.png) |
+
 **原生设置卡片**（需 DSH 0.1.0-rc.7+）：DSH 设置弹窗里出现"梁神卫士"卡片，可配置
 桌面通知开关、监控轮询间隔、历史保留条数、测速下载量，白名单校验落盘
 `~/.dsh/liang-guard/config.json`。
@@ -38,7 +48,7 @@ Windows Defender、CIM 性能计数器、netsh 等系统组件，不是摆设界
 ### 方式一：一键脚本（推荐）
 
 ```powershell
-git clone https://github.com/YOUR_GITHUB_USERNAME/dsh-liang-guard.git "$env:USERPROFILE\.dsh\plugins\dsh-liang-guard"
+git clone https://github.com/fatemarcus-hub/dsh-liang-guard.git "$env:USERPROFILE\.dsh\plugins\dsh-liang-guard"
 powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\.dsh\plugins\dsh-liang-guard\install.ps1"
 ```
 
